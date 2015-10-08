@@ -99,11 +99,8 @@ class NewVisitorTest(LiveServerTestCase):
 
 		# Again, there is no trace of Edith's list
 		page_text = self.browser.find_element_by_tag_name('body').text
-		assertNotIn('Buy peacock feathers', page_text)
+		self.assertNotIn('Buy peacock feathers', page_text)
 		self.assertIn('Buy milk', page_text)
 
-		self.fail('Finish the test!')
 
-		# She visits that URL - her to-do list is still there.
-
-		# Satisfied, she goes back to sleep
+		# Satisfied, they both go back to sleep
