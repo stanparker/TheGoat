@@ -40,17 +40,17 @@ def _update_settings(source_folder, site_name):
         key = ''.join(random.SystemRandom().choice(chars) for _ in range(50))
         append(secret_key_file, "SECRET_KEY = '%s'" % (key,))
     append(settings_path, '\nfrom .secret_key import SECRET_KEY')  #4
-    
+
 def _update_virtualenv(source_folder):
     virtualenv_folder = source_folder + '/../virtualenv'
-    if not exists(virtualenv_folder + '/bin/pip'):
+    if not exists(virtualenv_folder + '/bin/pip'): #1
         run('virtualenv --python=python3 %s' % (virtualenv_folder,))
-    run('%s/bin/pip install -r %s/requirements.txt' % (
-        virtualenv_folder, source_folder
+    run('%s/bin/pip install -r %s/requirements.txt' % ( #2
+            virtualenv_folder, source_folder
     ))
 
 def _update_static_files(source_folder):
-    run('cd %s && ../virtualenv/bin/python3 manage.py collectstatic --noinput' % (
+    run('cd %s && ../virtualenv/bin/python3 manage.py collectstatic --noinput' % ( # 1
         source_folder,
     ))
 
